@@ -1,8 +1,19 @@
-#Importando datos
+#Importando cada uno de los archivos desde el origen
+
+#Se deben importar cada uno de los datos exportados desde PISIS
+
+#Luego de importar cada uno de los archivos se consolida en uno solo
+TVSS_2019_2 <- rbind(ConsultaData1, ConsultaData2, ConsultaData3, ConsultaData4, ConsultaData5, ConsultaData6, ConsultaData7,ConsultaData8)
+View(TVSS_2019_2)
+
+#Se exporta el archivo en .txt
+write.table(TVSS_2019_2, file="TVSS_2019_2.txt", sep=";")
+
+#Importando datos en caso de requerirlos
 library(readr)
 TVSS_2019_2 <- read.csv("TVSS_2019_2.txt")
 
-#Valor total de las transferencias realizadas en el periodio 2019-12-31
+#Valor total de las transferencias realizadas en el periodo 2019-12-31
 sum(TVSS_2019_2$MontoEjecutadoTV, na.rm=TRUE)
 
 str(TVSS_2019_2)
