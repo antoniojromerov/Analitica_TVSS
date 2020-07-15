@@ -1,9 +1,48 @@
 #Importando cada uno de los archivos desde el origen
 
-#Se deben importar cada uno de los datos exportados desde PISIS (Pendiente)
+library(readr)
+ConsultaData1 <- read_delim("ConsultaData1.csv", 
+                            ";", escape_double = FALSE, col_types = cols(MontoEjecutadoTV = col_double()), 
+                            trim_ws = TRUE)
+
+ConsultaData2 <- read_delim("ConsultaData2.csv", 
+                            ";", escape_double = FALSE, col_types = cols(MontoEjecutadoTV = col_double()), 
+                            trim_ws = TRUE)
+
+ConsultaData3 <- read_delim("ConsultaData3.csv", 
+                            ";", escape_double = FALSE, col_types = cols(MontoEjecutadoTV = col_double()), 
+                            trim_ws = TRUE)
+
+ConsultaData4 <- read_delim("ConsultaData4.csv", 
+                            ";", escape_double = FALSE, col_types = cols(MontoEjecutadoTV = col_double()), 
+                            trim_ws = TRUE)
+
+ConsultaData5 <- read_delim("ConsultaData5.csv", 
+                            ";", escape_double = FALSE, col_types = cols(MontoEjecutadoTV = col_double()), 
+                            trim_ws = TRUE)
+
+ConsultaData6 <- read_delim("ConsultaData6.csv", 
+                            ";", escape_double = FALSE, col_types = cols(MontoEjecutadoTV = col_double()), 
+                            trim_ws = TRUE)
+
+ConsultaData7 <- read_delim("ConsultaData7.csv", 
+                            ";", escape_double = FALSE, col_types = cols(MontoEjecutadoTV = col_double()), 
+                            trim_ws = TRUE)
+
+ConsultaData8 <- read_delim("ConsultaData8.csv", 
+                            ";", escape_double = FALSE, col_types = cols(MontoEjecutadoTV = col_double()), 
+                            trim_ws = TRUE)
+
+ConsultaData9 <- read_delim("ConsultaData9.csv", 
+                            ";", escape_double = FALSE, col_types = cols(MontoEjecutadoTV = col_double()), 
+                            trim_ws = TRUE)
+
+sum(ConsultaData1$MontoEjecutadoTV, na.rm = TRUE)
+ConsultaData1$MontoEjecutadoTV <- as.numeric(ConsultaData1$MontoEjecutadoTV)
 
 #Luego de importar cada uno de los archivos se consolida en uno solo
-TVSS_2019_2 <- rbind(ConsultaData1, ConsultaData2, ConsultaData3, ConsultaData4, ConsultaData5, ConsultaData6, ConsultaData7,ConsultaData8)
+TVSS_2019_2 <- rbind(ConsultaData1, ConsultaData2, ConsultaData3, ConsultaData4, ConsultaData5, ConsultaData6, 
+                     ConsultaData7,ConsultaData8, ConsultaData9)
 View(TVSS_2019_2)
 
 #Se exporta el archivo en .txt
@@ -46,12 +85,6 @@ MuestrasMedicas <- MuestrasMedicas %>% group_by(NroIdMuestraMedica) %>%
   summarise(Transferencias = n(), Reportador = min(FuenteNroIdReportador),
             CantidadReportadores = n_distinct(FuenteNroIdReportador),
             Cantidad = sum(NumMuestrasMedicasEntregadas, na.rm = TRUE))
-
-#Casos específicos
-filter(TVSS_2019_2, NombreReceptor == "CUENTA DE ALTO COSTO")
-filter(TVSS_2019_2, NombreReceptor == "NUBIA STELLA OTERO VIANA")
-Receptor_18342 <- filter(TVSS_2019_2, NumIDReceptor == 18342)
-Receptor_38425 <- filter(TVSS_2019_2, NumIDReceptor == 38425)
 
 PersonasNaturales <- filter(TVSS_2019_2, TipoIDReceptor == "CC")
 
